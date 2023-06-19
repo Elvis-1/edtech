@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:edtech/common/values/colors.dart';
 import 'package:edtech/main.dart';
 import 'package:edtech/pages/welcome/bloc/welcom_block.dart';
 import 'package:edtech/pages/welcome/bloc/welcome_event.dart';
@@ -67,9 +68,9 @@ class _WelcomeState extends State<Welcome> {
                               dotsCount: 3,
                               mainAxisAlignment: MainAxisAlignment.center,
                               decorator: DotsDecorator(
-                                  color: Colors.grey,
+                                  color: AppColors.primaryThirdElementText,
                                   size: Size.square(8.0),
-                                  activeColor: Colors.blue,
+                                  activeColor: AppColors.primaryElement,
                                   activeSize: Size(18.0, 8.0),
                                   activeShape: RoundedRectangleBorder(
                                       borderRadius:
@@ -110,7 +111,7 @@ class _WelcomeState extends State<Welcome> {
             style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.normal,
-                color: Colors.black.withOpacity(0.5)),
+                color: AppColors.primarySecondaryElementText),
           ),
         ),
         GestureDetector(
@@ -132,7 +133,7 @@ class _WelcomeState extends State<Welcome> {
             width: 325.w,
             height: 50.h,
             decoration: BoxDecoration(
-                color: Colors.blue,
+                color: AppColors.primaryElement,
                 borderRadius: BorderRadius.circular(15.w),
                 boxShadow: [
                   BoxShadow(
