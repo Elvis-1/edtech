@@ -1,14 +1,18 @@
 import 'package:edtech/app_blocs.dart';
 import 'package:edtech/app_events.dart';
 import 'package:edtech/app_state.dart';
+import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:edtech/pages/sign%20in/signin.dart';
 import 'package:edtech/pages/welcome/bloc/welcom_block.dart';
 import 'package:edtech/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -21,10 +25,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         // create: (context) => WelcomeBloc(),
         providers: [
-          BlocProvider(create: (context) => WelcomeBloc()),
+          BlocProvider(lazy: false, create: (context) => WelcomeBloc()),
           BlocProvider(
-              // lazy: false, // setting which bloc should be created first
-              create: (context) => AppBloc())
+              lazy: false, // setting which bloc should be created first
+              create: (context) => AppBloc()),
+          BlocProvider(create: (context) => SignInBloc()),
         ],
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
@@ -46,15 +51,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -106,6 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // 4:16
+  // 12:40
   // https://www.dbestech.com/tutorials/online-learning-course-app-tutorial
 }

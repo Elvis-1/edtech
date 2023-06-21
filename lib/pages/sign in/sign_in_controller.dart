@@ -17,9 +17,11 @@ class SignInController {
 
         if (emailAddress.isEmpty) {
           //
+          print("Email is empty");
         }
         if (password.isEmpty) {
           //
+          print("Password is empty");
         }
 
         try {
@@ -27,14 +29,28 @@ class SignInController {
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
 
-          if (credentials.user == null) {}
+          if (credentials.user == null) {
+            //
+            print("User does not exist");
+          }
           if (credentials.user!.emailVerified) {}
 
           var user = credentials.user;
 
           if (user != null) {
             // we got a verified user from firebase
-          } else {}
+            print("user exists");
+          } else {
+            print("no user");
+          }
+        } on FirebaseAuthException catch (e) {
+          if (e.code == "user-not-found") {
+            print("No user found for that email");
+          } else if (e.code == "wrong-password") {
+            print("wrong password provided for that user");
+          } else if (e.code == "invalid-email") {
+            print("Email format wrong");
+          }
         } catch (e) {}
       }
     } catch (e) {}
