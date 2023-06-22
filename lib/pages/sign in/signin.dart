@@ -2,7 +2,7 @@ import 'package:edtech/pages/sign%20in/bloc/sigin_events.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_states.dart';
 import 'package:edtech/pages/sign%20in/sign_in_controller.dart';
-import 'package:edtech/pages/sign%20in/widgets/sign_in_widget.dart';
+import 'package:edtech/pages/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +23,7 @@ class _SignInState extends State<SignIn> {
               child: SafeArea(
                   child: Scaffold(
                 backgroundColor: Colors.white,
-                appBar: buildAppBar(),
+                appBar: buildAppBar("Login"),
                 body: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
@@ -67,7 +67,9 @@ class _SignInState extends State<SignIn> {
                         SignInController(context: context)
                             .handleSignIn("email");
                       }),
-                      buildLoginAndRegBtn("Register", 'register', () {}),
+                      buildLoginAndRegBtn("Sign Up", 'register', () {
+                        Navigator.of(context).pushNamed("register");
+                      }),
                     ],
                   ),
                 ),

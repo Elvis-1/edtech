@@ -1,6 +1,7 @@
 import 'package:edtech/app_blocs.dart';
 import 'package:edtech/app_events.dart';
 import 'package:edtech/app_state.dart';
+import 'package:edtech/pages/bloc_providers.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:edtech/pages/sign%20in/signin.dart';
 import 'package:edtech/pages/welcome/bloc/welcom_block.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'pages/register/register.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,13 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         // create: (context) => WelcomeBloc(),
-        providers: [
-          BlocProvider(lazy: false, create: (context) => WelcomeBloc()),
-          BlocProvider(
-              lazy: false, // setting which bloc should be created first
-              create: (context) => AppBloc()),
-          BlocProvider(create: (context) => SignInBloc()),
-        ],
+        providers: AppBlocProviders.allBlocProviders,
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -43,6 +40,7 @@ class MyApp extends StatelessWidget {
             routes: {
               "myHomePage": (context) => MyHomePage(title: "Home"),
               "signIn": (context) => const SignIn(),
+              "register": (context) => const Register(),
             },
           ),
         ));
@@ -102,6 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // 12:40
+  // 01:05
   // https://www.dbestech.com/tutorials/online-learning-course-app-tutorial
 }

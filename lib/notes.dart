@@ -9,5 +9,6 @@ class Notes extends StatelessWidget {
     return const Placeholder();
 
     // firebase_auth plugin for firebase auth
+    // fluttertoast for ui messages
   }
 }

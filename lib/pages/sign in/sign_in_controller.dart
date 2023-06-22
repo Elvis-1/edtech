@@ -1,3 +1,4 @@
+import 'package:edtech/common/widgets/flutter_toast.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,13 @@ class SignInController {
 
         if (emailAddress.isEmpty) {
           //
-          print("Email is empty");
+          toastInfo(msg: "You need to fill in an email address");
+          return;
         }
         if (password.isEmpty) {
           //
-          print("Password is empty");
+          toastInfo(msg: "You need to fill in a password");
+          return;
         }
 
         try {
@@ -31,9 +34,13 @@ class SignInController {
 
           if (credentials.user == null) {
             //
-            print("User does not exist");
+            toastInfo(msg: "User does not exist");
+            return;
           }
-          if (credentials.user!.emailVerified) {}
+          if (!credentials.user!.emailVerified) {
+            toastInfo(msg: "User not verified");
+            return;
+          }
 
           var user = credentials.user;
 
@@ -41,15 +48,19 @@ class SignInController {
             // we got a verified user from firebase
             print("user exists");
           } else {
-            print("no user");
+            toastInfo(msg: "Currently you are not a user of this app");
+            return;
           }
         } on FirebaseAuthException catch (e) {
           if (e.code == "user-not-found") {
-            print("No user found for that email");
+            toastInfo(msg: "No User found for that email");
+            return;
           } else if (e.code == "wrong-password") {
-            print("wrong password provided for that user");
+            toastInfo(msg: "wrong password provided for that user");
+            return;
           } else if (e.code == "invalid-email") {
-            print("Email format wrong");
+            toastInfo(msg: "Your Email format wrong");
+            return;
           }
         } catch (e) {}
       }
