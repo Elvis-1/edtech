@@ -100,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // 01:05
+  // 02:10
+  // explaining copywith method in 1:44
   // https://www.dbestech.com/tutorials/online-learning-course-app-tutorial
 }
