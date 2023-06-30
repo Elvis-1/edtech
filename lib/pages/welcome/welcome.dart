@@ -125,7 +125,7 @@ class _WelcomeState extends State<Welcome> {
               //     builder: ((context) => MyHomePage(title: "String"))));
 
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil('signIn', (route) => false);
+                  .pushNamedAndRemoveUntil('/sign_in', (route) => false);
             }
           },
           child: Container(
