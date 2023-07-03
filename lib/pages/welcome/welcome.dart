@@ -1,5 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:edtech/common/service/storage_service.dart';
 import 'package:edtech/common/values/colors.dart';
+import 'package:edtech/common/values/constant.dart';
+import 'package:edtech/global.dart';
 import 'package:edtech/main.dart';
 import 'package:edtech/pages/welcome/bloc/welcom_block.dart';
 import 'package:edtech/pages/welcome/bloc/welcome_event.dart';
@@ -118,12 +121,15 @@ class _WelcomeState extends State<Welcome> {
           onTap: () {
             if (index < 3) {
               pageController.animateToPage(index,
-                  duration: const Duration(microseconds: 1000),
+                  duration: const Duration(milliseconds: 1000),
                   curve: Curves.easeIn);
             } else {
               // Navigator.of(context).push(MaterialPageRoute(
               //     builder: ((context) => MyHomePage(title: "String"))));
-
+              Global.storageService
+                  .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+              print(
+                  "print storage ${Global.storageService.getDeviceFirstOpen()}");
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('/sign_in', (route) => false);
             }

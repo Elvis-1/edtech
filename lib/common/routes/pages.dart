@@ -10,6 +10,8 @@ import 'package:edtech/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../global.dart';
+
 class AppPages {
   static List<PageEntity> routes() {
     return [
@@ -43,17 +45,25 @@ class AppPages {
 // a model that covers the entire screen as we click on navigator object
   static MaterialPageRoute GenerateRouteSettings(RouteSettings settings) {
     if (settings.name != null) {
-      print("valid route name ${settings.name}");
+      // print("valid route name ${settings.name}");
       // check for route name matching when navigator get triggered
       var result = routes().where((element) => element.route == settings.name);
 
       if (result.isNotEmpty) {
+        bool deviceFirstOpen = Global.storageService.getDeviceFirstOpen();
+        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+          bool isLoggedIn = Global.storageService.getIsLoggedin();
+          if (isLoggedIn) {
+            return MaterialPageRoute(
+                builder: (_) => const ApplicationPage(), settings: settings);
+          }
+          return MaterialPageRoute(
+              builder: (_) => const SignIn(), settings: settings);
+        }
         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }
     }
-
-    print("valid route name ${settings.name}");
 
     return MaterialPageRoute(
         builder: (_) => const SignIn(), settings: settings);

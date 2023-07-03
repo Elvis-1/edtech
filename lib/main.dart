@@ -3,13 +3,11 @@ import 'package:edtech/pages/application/application_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-import 'pages/register/register.dart';
+import 'global.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Global.init();
   runApp(const MyApp());
 }
 
@@ -32,9 +30,10 @@ class MyApp extends StatelessWidget {
                 appBarTheme: const AppBarTheme(
                     elevation: 0, backgroundColor: Colors.white)),
             onGenerateRoute: AppPages.GenerateRouteSettings,
+            home: ApplicationPage(),
           ),
         ));
   }
 
-  // 3:57 part 2
+  // 13:28 part 3
 }

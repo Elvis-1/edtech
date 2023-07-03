@@ -1,8 +1,11 @@
+import 'package:edtech/common/values/constant.dart';
 import 'package:edtech/common/widgets/flutter_toast.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../global.dart';
 
 class SignInController {
   final BuildContext context;
@@ -47,6 +50,8 @@ class SignInController {
           if (user != null) {
             // we got a verified user from firebase
             print("user exists");
+            Global.storageService
+                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, "12345678");
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
