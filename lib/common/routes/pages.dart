@@ -1,6 +1,8 @@
 import 'package:edtech/common/routes/names.dart';
 import 'package:edtech/pages/application/application_page.dart';
 import 'package:edtech/pages/application/bloc/app_bloc.dart';
+import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
+import 'package:edtech/pages/home/home_page.dart';
 import 'package:edtech/pages/register/blocs/register_blocs.dart';
 import 'package:edtech/pages/register/register.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
@@ -30,7 +32,11 @@ class AppPages {
       PageEntity(
           route: AppRoutes.APPLICATION,
           page: const ApplicationPage(),
-          bloc: BlocProvider(create: (_) => AppBlocs()))
+          bloc: BlocProvider(create: (_) => AppBlocs())),
+      PageEntity(
+          route: AppRoutes.HOME_PAGE,
+          page: const HomePage(),
+          bloc: BlocProvider(create: (_) => HomePageBlocs()))
     ];
   }
 

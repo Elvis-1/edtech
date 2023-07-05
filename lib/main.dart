@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         providers: [...AppPages.allBlocProviders(context)],
         //AppBlocProviders.allBlocProviders,
         child: ScreenUtilInit(
+          designSize: const Size(375, 812),
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
@@ -35,5 +36,5 @@ class MyApp extends StatelessWidget {
         ));
   }
 
-  // 13:28 part 3
+  // 1:51 part 3
 }

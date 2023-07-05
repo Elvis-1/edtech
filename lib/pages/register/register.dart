@@ -31,7 +31,7 @@ class Register extends StatelessWidget {
                     child: reusableText(
                         "Enter your details below for a free sign up")),
                 Container(
-                  margin: EdgeInsets.only(top: 36.h),
+                  margin: EdgeInsets.only(top: 60.h),
                   padding: EdgeInsets.only(left: 25.w, right: 25.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class Register extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 25.w),
                   child: reusableText(
-                      "Enter your details below for a free sign up"),
+                      "By creating an account, you have to agree to our terms and conditions"),
                 ),
                 buildLoginAndRegBtn("Sign Up", 'login', () {
                   RegisterController(context).handleEmailRgister();
