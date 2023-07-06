@@ -3,6 +3,8 @@ import 'package:edtech/pages/application/application_page.dart';
 import 'package:edtech/pages/application/bloc/app_bloc.dart';
 import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
 import 'package:edtech/pages/home/home_page.dart';
+import 'package:edtech/pages/profile/settings/bloc/settings_bloc.dart';
+import 'package:edtech/pages/profile/settings/settings_page.dart';
 import 'package:edtech/pages/register/blocs/register_blocs.dart';
 import 'package:edtech/pages/register/register.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
@@ -36,7 +38,11 @@ class AppPages {
       PageEntity(
           route: AppRoutes.HOME_PAGE,
           page: const HomePage(),
-          bloc: BlocProvider(create: (_) => HomePageBlocs()))
+          bloc: BlocProvider(create: (_) => HomePageBlocs())),
+      PageEntity(
+          route: AppRoutes.SETTINGS,
+          page: const SettingsPage(),
+          bloc: BlocProvider(create: (_) => SettingsBloc()))
     ];
   }
 

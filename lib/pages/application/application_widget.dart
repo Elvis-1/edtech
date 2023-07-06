@@ -1,3 +1,4 @@
+import 'package:edtech/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,9 +17,7 @@ Widget buildPage(int index) {
     Center(
       child: Text("Chat"),
     ),
-    Center(
-      child: Text("Profile"),
-    ),
+    ProfilePage(),
   ];
 
   return _widget[index];
