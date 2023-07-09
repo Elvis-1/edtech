@@ -3,7 +3,7 @@ import 'package:edtech/common/values/colors.dart';
 import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
 import 'package:edtech/pages/home/bloc/home_page_event.dart';
 import 'package:edtech/pages/home/bloc/home_page_state.dart';
-import 'package:edtech/pages/home/widgets/base_text_widget.dart';
+import 'package:edtech/common/widgets/base_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
