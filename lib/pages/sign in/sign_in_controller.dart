@@ -50,8 +50,10 @@ class SignInController {
           if (user != null) {
             // we got a verified user from firebase
             print("user exists");
+            // Global.storageService
+            //     .setString(AppConstants.STORAGE_USER_TOKEN_KEY, "12345678");
             Global.storageService
-                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, "12345678");
+                .setString(AppConstants.STORAGE_USER_PROFILE_KEY, "12345678");
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {

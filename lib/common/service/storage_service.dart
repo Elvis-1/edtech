@@ -24,7 +24,7 @@ class StorageService {
   }
 
   bool getIsLoggedin() {
-    return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) == null
+    return _prefs.getString(AppConstants.STORAGE_USER_PROFILE_KEY) == null
         ? false
         : true;
   }
