@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:edtech/common/values/colors.dart';
+import 'package:edtech/common/values/constant.dart';
 import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
 import 'package:edtech/pages/home/bloc/home_page_event.dart';
 import 'package:edtech/pages/home/bloc/home_page_state.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // import '../../common_widgets.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(String avatar) {
   return AppBar(
     title: Container(
       width: double.infinity,
@@ -28,9 +29,10 @@ AppBar buildAppBar() {
             child: Container(
               width: 40.w,
               height: 40.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/icons/person.png"))),
+                      image: NetworkImage(
+                          "${AppConstants.SERVER_API_URL}/avatar"))),
             ),
           )
         ],

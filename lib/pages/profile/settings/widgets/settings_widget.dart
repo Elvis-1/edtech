@@ -28,11 +28,7 @@ Widget settingsButton(BuildContext context, void Function()? func) {
                       Navigator.of(context).pop();
                     },
                     child: const Text("Cancel")),
-                TextButton(
-                    onPressed: () {
-                      func;
-                    },
-                    child: const Text("Confirm"))
+                TextButton(onPressed: func, child: const Text("Confirm"))
               ],
             );
           });

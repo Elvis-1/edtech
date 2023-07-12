@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:edtech/common/entities/entities.dart';
 import 'package:edtech/common/values/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,12 +27,23 @@ class StorageService {
   }
 
   bool getIsLoggedin() {
-    return _prefs.getString(AppConstants.STORAGE_USER_PROFILE_KEY) == null
+    return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) == null
         ? false
         : true;
   }
 
   Future<bool> remove(String key) async {
     return _prefs.remove(key);
+  }
+
+  UserItem? getUserProfile() {
+    var profileOffline =
+        _prefs.getString(AppConstants.STORAGE_USER_PROFILE_KEY) ?? "";
+
+    if (profileOffline.isNotEmpty) {
+      return UserItem.fromJson(jsonDecode(profileOffline));
+    }
+
+    return null;
   }
 }
