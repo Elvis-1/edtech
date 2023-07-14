@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:edtech/common/entities/course.dart';
 import 'package:edtech/common/values/colors.dart';
 import 'package:edtech/common/values/constant.dart';
 import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // import '../../common_widgets.dart';
 
-AppBar buildAppBar(String avatar) {
+AppBar buildAppBar() {
   return AppBar(
     title: Container(
       width: double.infinity,
@@ -29,10 +30,10 @@ AppBar buildAppBar(String avatar) {
             child: Container(
               width: 40.w,
               height: 40.h,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "${AppConstants.SERVER_API_URL}/avatar"))),
+              decoration:
+                  const BoxDecoration(image: DecorationImage(image: AssetImage(
+                      //"${AppConstants.SERVER_API_URL}/avatar"
+                      "assets/icons/person.png"))),
             ),
           )
         ],
@@ -230,7 +231,7 @@ Widget _reusableMenuText(String menuText,
 }
 
 // for course grid view
-Widget courseGrid() {
+Widget courseGrid(CourseItem item) {
   return Container(
     width: 100,
     height: 100,
@@ -238,14 +239,16 @@ Widget courseGrid() {
     decoration: BoxDecoration(
         color: Colors.red,
         borderRadius: BorderRadius.circular(15.w),
-        image: const DecorationImage(
-            fit: BoxFit.fill, image: AssetImage("assets/icons/Image(1).png"))),
+        image: DecorationImage(
+            fit: BoxFit.fill,
+            image:
+                NetworkImage(AppConstants.SERVER_UPLOADS + item.thumbnail!))),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Best course for IT and Engineering,",
+          item.name ?? "",
           maxLines: 1,
           overflow: TextOverflow.clip,
           textAlign: TextAlign.left,
@@ -259,7 +262,7 @@ Widget courseGrid() {
           height: 5.h,
         ),
         Text(
-          "Flutter best course,",
+          item.description ?? "",
           maxLines: 1,
           overflow: TextOverflow.clip,
           textAlign: TextAlign.left,

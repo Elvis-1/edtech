@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
     super.initState();
     _homeController = HomeController(context: context);
-    _homeController.inite();
+    _homeController.init();
   }
 
   @override
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return _homeController == null
         ? Container()
         : Scaffold(
-            appBar: buildAppBar(_homeController.userProfile!.avatar ?? ""),
+            appBar: buildAppBar(),
             body: BlocBuilder<HomePageBlocs, HomePageStates>(
               builder: (context, state) {
                 return Container(
@@ -64,10 +64,12 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.symmetric(
                             vertical: 18.h, horizontal: 8.w),
                         sliver: SliverGrid(
-                            delegate: SliverChildBuilderDelegate(childCount: 4,
+                            delegate: SliverChildBuilderDelegate(
+                                childCount: state.courseItem.length,
                                 (BuildContext context, int index) {
                               return GestureDetector(
-                                  onTap: () {}, child: courseGrid());
+                                  onTap: () {},
+                                  child: courseGrid(state.courseItem[index]));
                             }),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(

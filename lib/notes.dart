@@ -10,5 +10,7 @@ class Notes extends StatelessWidget {
 
     // firebase_auth plugin for firebase auth
     // fluttertoast for ui messages
+
+    // int is not a subtype of string, when data is fetched from server explained in 6:36 part 4
   }
 }

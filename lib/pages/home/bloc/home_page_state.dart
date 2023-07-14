@@ -1,8 +1,16 @@
-class HomePageStates {
-  const HomePageStates({this.index = 0});
-  final int index;
+import 'package:edtech/common/entities/course.dart';
 
-  HomePageStates copyWith({int? index}) {
-    return HomePageStates(index: index ?? this.index);
+class HomePageStates {
+  const HomePageStates(
+      {this.index = 0, this.courseItem = const <CourseItem>[]});
+
+  final int index;
+  final List<CourseItem> courseItem;
+
+  HomePageStates copyWith({int? index, List<CourseItem>? courseItem}) {
+    return HomePageStates(
+      index: index ?? this.index,
+      courseItem: courseItem ?? this.courseItem,
+    );
   }
 }

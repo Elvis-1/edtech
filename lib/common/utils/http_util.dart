@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'package:edtech/common/values/constant.dart';
+
+import '../../global.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -22,11 +26,35 @@ class HttpUtil {
     dio = Dio(options);
   }
 
-  Future post(String path,
-      {dynamic data, Map<String, dynamic>? queryParameters}) async {
-    var response =
-        await dio.post(path, data: data, queryParameters: queryParameters);
-    print("My response data is ${response.data}");
+  Future postData(String path,
+      {dynamic data,
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
+    Options requestOptions = Options();
+
+    requestOptions.headers = requestOptions.headers ?? {};
+
+    Map<String, dynamic>? authorisation = getAuthorizationHeader();
+
+    if (authorisation != null) {
+      requestOptions.headers!.addAll(authorisation);
+    }
+
+    var response = await dio.post(path,
+        data: data, queryParameters: queryParameters, options: requestOptions);
+    // print("My response data is ${response.data}");
+
     return response.data;
+  }
+
+  Map<String, dynamic>? getAuthorizationHeader() {
+    var headers = <String, dynamic>{};
+    var accessToken = Global.storageService.getUserToken();
+
+    if (accessToken.isNotEmpty) {
+      headers['Authorization'] = 'Bearer $accessToken';
+    }
+
+    return headers;
   }
 }
