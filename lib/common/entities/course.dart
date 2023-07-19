@@ -188,7 +188,7 @@ class CourseItem {
         price: json["price"].toString(),
         amount_total: json["amount_total"],
         lesson_num: json["lesson_num"],
-        video_len: json["video_len"],
+        video_len: json["video_length"],
         down_num: json["down_num"],
         follow: json["follow"],
         score: json["score"],

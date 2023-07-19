@@ -12,5 +12,8 @@ class Notes extends StatelessWidget {
     // fluttertoast for ui messages
 
     // int is not a subtype of string, when data is fetched from server explained in 6:36 part 4
+    // composer require stripe/stripe-php
+
+    //  Unhandled Exception: type 'List<dynamic>' is not a subtype of type 'Map<String, dynamic>' -- 2:26 part 6.
   }
 }
