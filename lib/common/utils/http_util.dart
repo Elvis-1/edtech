@@ -17,8 +17,8 @@ class HttpUtil {
   HttpUtil._internal() {
     BaseOptions options = BaseOptions(
         baseUrl: AppConstants.SERVER_API_URL,
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(minutes: 20),
+        receiveTimeout: const Duration(minutes: 20),
         headers: {},
         contentType: "application/json: charset=utf-8",
         responseType: ResponseType.json);

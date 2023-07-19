@@ -32,10 +32,11 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.amber,
                 appBarTheme: const AppBarTheme(
                     elevation: 0, backgroundColor: Colors.white)),
+            // home: const ApplicationPage(),
             onGenerateRoute: AppPages.GenerateRouteSettings,
           ),
         ));
   }
 
-  // 6:17 part 4
+  // 1000:0 part 5
 }

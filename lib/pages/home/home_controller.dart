@@ -8,21 +8,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/apis/course_api.dart';
 
 class HomeController {
-  final BuildContext context;
-  HomeController({required this.context});
+  //late final BuildContext context;
+  BuildContext? context;
+  UserItem get userProfile => Global.storageService.getUserProfile();
 
-  UserItem? userProfile = Global.storageService.getUserProfile();
+  // home controller is making api calls every time a button is clicked, lets make it a singleton. To create a singleton, in general you create a private contructor
 
-  void init() async {
-    print("... home init method...");
-    var result = await CourseApi().courseList();
+  static final _singleton = HomeController._external();
 
-    if (result.code == 200) {
-      context.read<HomePageBlocs>().add(HomePageCourseItemEvent(result.data!));
-      print("Perfect");
-      print(result.data![0].name);
-    } else {
-      print(result.code);
+  HomeController._external();
+
+  // this is a factory contructor
+  // makes sure you have the original only one instance
+  factory HomeController({required context}) {
+    _singleton.context = context;
+    return _singleton;
+  }
+
+  Future<void> init() async {
+    if (Global.storageService.getUserToken().isNotEmpty) {
+      print("... home init method...");
+      var result = await CourseApi().courseList();
+
+      if (result.code == 200) {
+        if (context!.mounted) {
+          context!
+              .read<HomePageBlocs>()
+              .add(HomePageCourseItemEvent(result.data!));
+        }
+      } else {
+        print(result.code);
+      }
     }
   }
 }

@@ -11,5 +11,5 @@ class HomePageDots extends HomePageEvents {
 
 class HomePageCourseItemEvent extends HomePageEvents {
   const HomePageCourseItemEvent(this.courseItem);
-  final List<CourseItem> courseItem;
+  final List<CourseItem>? courseItem;
 }

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:edtech/common/entities/entities.dart';
 import 'package:edtech/common/values/constant.dart';
 import 'package:edtech/common/widgets/flutter_toast.dart';
+import 'package:edtech/pages/home/home_controller.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,11 @@ class SignInController {
 
             // type 1 means email login
             loginRequestEntity.type = 1;
-            asyncPostAllData(loginRequestEntity);
+            await asyncPostAllData(loginRequestEntity);
+
+            if (context.mounted) {
+              await HomeController(context: context).init();
+            }
           } else {
             toastInfo(msg: "Currently you are not a user of this app");
             return;
@@ -91,7 +96,7 @@ class SignInController {
     } catch (e) {}
   }
 
-  void asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+  asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     EasyLoading.show(
       indicator: CircularProgressIndicator(),
       maskType: EasyLoadingMaskType.clear,
@@ -107,8 +112,10 @@ class SignInController {
         Global.storageService.setString(
             AppConstants.STORAGE_USER_TOKEN_KEY, result.data.access_token);
         EasyLoading.dismiss();
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil("/application", (route) => false);
+        if (context.mounted) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/application", (route) => false);
+        }
       } catch (e) {
         print("saving local storage error ${e.toString()}");
       }
