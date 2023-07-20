@@ -141,8 +141,8 @@ Widget slidersView(BuildContext context, HomePageStates state) {
           },
           children: [
             _slidersWidget(path: "assets/icons/art.png"),
-            _slidersWidget(path: "assets/icons/Image(1).png"),
-            _slidersWidget(path: "assets/icons/Image(2).png"),
+            _slidersWidget(path: "assets/icons/edu_1.jpg"),
+            _slidersWidget(path: "assets/icons/edu_1.jpeg"),
           ],
         ),
       ),
@@ -164,7 +164,7 @@ Widget slidersView(BuildContext context, HomePageStates state) {
 }
 
 // sliders widget
-Widget _slidersWidget({String path = "assets/icons/art.png"}) {
+Widget _slidersWidget({String path = "assets/icons/edu_2.png"}) {
   return Container(
     margin: EdgeInsets.only(top: 20.h),
     width: 325.w,

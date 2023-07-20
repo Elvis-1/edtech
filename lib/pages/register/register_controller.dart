@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../common/service/conection_service.dart';
 import '../../common/values/constant.dart';
+import '../../common/widgets/dialog.dart';
 
 class RegisterController {
   final BuildContext context;
@@ -37,6 +39,17 @@ class RegisterController {
     }
 
     try {
+      var result = await InternetConnection().checkInternetConnection();
+      if (!result) {
+        if (context.mounted) {
+          showDialogueBox(
+              context,
+              "Please check your internet connection and try again",
+              'Internet Connection');
+          return;
+        }
+      }
+
       final credentail = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 

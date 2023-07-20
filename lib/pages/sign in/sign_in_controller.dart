@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:edtech/common/entities/entities.dart';
+import 'package:edtech/common/service/conection_service.dart';
 import 'package:edtech/common/values/constant.dart';
+import 'package:edtech/common/widgets/dialog.dart';
 import 'package:edtech/common/widgets/flutter_toast.dart';
 import 'package:edtech/pages/home/home_controller.dart';
 import 'package:edtech/pages/sign%20in/bloc/signin_bloc.dart';
@@ -19,6 +21,16 @@ class SignInController {
   const SignInController({required this.context});
 
   void handleSignIn(String type) async {
+    var result = await InternetConnection().checkInternetConnection();
+    if (!result) {
+      if (context.mounted) {
+        showDialogueBox(
+            context,
+            "Please check your internet connection and try again",
+            'Internet Connection');
+        return;
+      }
+    }
     try {
       if (type == "email") {
         // BlocProvider.of<SignInBloc>(context).state
