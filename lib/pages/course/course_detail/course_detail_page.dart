@@ -77,7 +77,12 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                   height: 20.h,
                                 ),
                                 // couse buy button
-                                goBuyButton("Go Buy"),
+                                GestureDetector(
+                                    onTap: () {
+                                      _courseDetailController
+                                          .goBuy(state.courseItem!.id);
+                                    },
+                                    child: goBuyButton("Go Buy")),
                                 SizedBox(
                                   height: 20.h,
                                 ),
@@ -85,7 +90,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                 courseSummaryTitle(),
 
                                 // course summary in list
-                                courseSummaryView(context),
+                                courseSummaryView(context, state),
                                 SizedBox(
                                   height: 20.h,
                                 ),

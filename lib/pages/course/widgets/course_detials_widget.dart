@@ -100,12 +100,13 @@ Widget courseSummaryTitle() {
   return reusableText("The Course Includes", fontSize: 14.sp);
 }
 
-var imageInfo = <String, String>{
-  "36 Hours Video": "video_detail.png",
-  "Total 30 Lesson": "file_detail.png",
-  "67 Downlaodable Resources": "download_detail.png",
-};
-Widget courseSummaryView(BuildContext context) {
+Widget courseSummaryView(BuildContext context, CourseDetailsState state) {
+  var imageInfo = <String, String>{
+    "${state.courseItem!.video_len ?? "0"} Hours Video": "video_detail.png",
+    "Total ${state.courseItem!.lesson_num ?? "0"} Lesson": "file_detail.png",
+    "${state.courseItem!.down_num ?? "0"}  Downlaodable Resources":
+        "download_detail.png",
+  };
   return Column(
     children: [
       ...List.generate(

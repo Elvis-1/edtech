@@ -5,6 +5,7 @@ import 'package:edtech/pages/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:edtech/pages/course/course_detail/bloc/course_detail_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CourseDetailController {
   final BuildContext context;
@@ -33,6 +34,28 @@ class CourseDetailController {
     } else {
       toastInfo(msg: "Something went wrong");
       print("------------ Error ${result.data}");
+    }
+  }
+
+  void goBuy(int? id) async {
+    EasyLoading.show(
+        indicator: CircularProgressIndicator(),
+        maskType: EasyLoadingMaskType.clear,
+        dismissOnTap: true);
+
+    CourseRequestEntity courseRequestEntity = CourseRequestEntity();
+
+    courseRequestEntity.id = id;
+    var result = await CourseApi.coursePay(params: courseRequestEntity);
+
+    EasyLoading.dismiss();
+    if (result.code == 200) {
+      // cleaner format of a url
+      var url = Uri.decodeFull(result.data!);
+
+      print("-- my returned stripe url is $url ---------");
+    } else {
+      print("Payment failed");
     }
   }
 }

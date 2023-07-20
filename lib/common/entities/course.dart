@@ -189,7 +189,7 @@ class CourseItem {
         amount_total: json["amount_total"],
         lesson_num: json["lesson_num"],
         video_len: json["video_length"],
-        down_num: json["down_num"],
+        down_num: json["downloadable_res"],
         follow: json["follow"],
         score: json["score"],
         id: json["id"],
