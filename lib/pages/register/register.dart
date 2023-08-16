@@ -48,7 +48,7 @@ class Register extends StatelessWidget {
                       }),
                       reusableText("Password"),
                       buildTextField(
-                          "Enter Your email address", "password", "lock",
+                          "Enter Your password address", "password", "lock",
                           (value) {
                         context.read<RegisterBloc>().add(PasswordEvent(value));
                       }),

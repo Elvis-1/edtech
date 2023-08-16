@@ -1,8 +1,12 @@
 import 'package:edtech/common/apis/course_api.dart';
 import 'package:edtech/common/entities/course.dart';
+import 'package:edtech/common/routes/names.dart';
+import 'package:edtech/common/widgets/dialog.dart';
 import 'package:edtech/common/widgets/flutter_toast.dart';
 import 'package:edtech/pages/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:edtech/pages/course/course_detail/bloc/course_detail_event.dart';
+import 'package:edtech/pages/course/paywebview/bloc/payview_bloc.dart';
+import 'package:edtech/pages/course/paywebview/bloc/payview_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -52,9 +56,12 @@ class CourseDetailController {
     if (result.code == 200) {
       // cleaner format of a url
       var url = Uri.decodeFull(result.data!);
-
-      print("-- my returned stripe url is $url ---------");
+      // showDialogueBox(context, 'Coming soon', 'Order');
+      await Navigator.of(context)
+          .pushNamed(AppRoutes.PAY_WEB_VIEW, arguments: {"url": url});
+      // print("-- my returned stripe url is $url ---------");
     } else {
+      showDialogueBox(context, 'Coming soon', 'Order');
       print("Payment failed");
     }
   }

@@ -3,6 +3,8 @@ import 'package:edtech/pages/application/application_page.dart';
 import 'package:edtech/pages/application/bloc/app_bloc.dart';
 
 import 'package:edtech/pages/course/course_detail/course_detail_page.dart';
+import 'package:edtech/pages/course/paywebview/bloc/payview_bloc.dart';
+import 'package:edtech/pages/course/paywebview/bloc/paywebview.dart';
 import 'package:edtech/pages/home/bloc/home_page_bloc.dart';
 import 'package:edtech/pages/home/home_page.dart';
 import 'package:edtech/pages/profile/settings/bloc/settings_bloc.dart';
@@ -51,6 +53,10 @@ class AppPages {
           route: AppRoutes.COURSE_DETAILS_PAGE,
           page: const CourseDetailPage(),
           bloc: BlocProvider(create: (_) => CourseDetailsBloc())),
+      PageEntity(
+          route: AppRoutes.PAY_WEB_VIEW,
+          page: const PayWebView(),
+          bloc: BlocProvider(create: (_) => PayWebViewBlocs())),
       // PageEntity(
       //     route: AppRoutes.COURSE_DETAILS_PAGE,
       //     page: const CourseDetailPage(),

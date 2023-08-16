@@ -16,8 +16,8 @@ class RegisterController {
     final state = context.read<RegisterBloc>().state;
 
     String userName = state.userName;
-    String email = state.email;
-    String password = state.password;
+    String emailAddress = state.email;
+    String passwordAddress = state.password;
     String rePassword = state.rePassword;
 
     if (userName.isEmpty) {
@@ -25,11 +25,11 @@ class RegisterController {
       return;
     }
 
-    if (email.isEmpty) {
+    if (emailAddress.isEmpty) {
       toastInfo(msg: "Email cannot be empty");
       return;
     }
-    if (password.isEmpty) {
+    if (passwordAddress.isEmpty) {
       toastInfo(msg: "Password cannot be empty");
       return;
     }
@@ -49,7 +49,8 @@ class RegisterController {
           return;
         }
       }
-
+      String email = emailAddress.trim();
+      String password = passwordAddress.trim();
       final credentail = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
@@ -74,7 +75,7 @@ class RegisterController {
       } else if (e.code == "weak-password") {
         toastInfo(msg: "The password provided is too weak");
       } else if (e.code == "invalid-email") {
-        toastInfo(msg: "Invalid emaiil");
+        toastInfo(msg: "Invalid email");
       }
     }
   }

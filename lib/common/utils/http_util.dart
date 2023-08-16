@@ -40,11 +40,17 @@ class HttpUtil {
       requestOptions.headers!.addAll(authorisation);
     }
 
-    var response = await dio.post(path,
-        data: data, queryParameters: queryParameters, options: requestOptions);
-    // print("My response data is ${response.data}");
+    try {
+      var response = await dio.post(path,
+          data: data,
+          queryParameters: queryParameters,
+          options: requestOptions);
+      print("My response data is ${response.data}");
 
-    return response.data;
+      return response.data;
+    } catch (e) {
+      print('inside dio function ' + e.toString());
+    }
   }
 
   Map<String, dynamic>? getAuthorizationHeader() {

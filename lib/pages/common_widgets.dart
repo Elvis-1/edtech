@@ -2,6 +2,8 @@ import 'package:edtech/common/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../common/widgets/dialog.dart';
+
 AppBar buildAppBar(String type) {
   return AppBar(
     bottom: PreferredSize(
@@ -32,17 +34,32 @@ Widget buildThirdPartyLogin(BuildContext context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _reusableIcons("google"),
-        _reusableIcons("apple"),
-        _reusableIcons("facebook")
+        GestureDetector(
+            onTap: () {
+              print('hessrr');
+              showDialogueBox(context, 'Coming Soon', 'Social Login');
+            },
+            child: _reusableIcons("google", context)),
+        GestureDetector(
+            onTap: () {
+              return showDialogueBox(context, 'Coming Soon', 'Social Login');
+            },
+            child: _reusableIcons("apple", context)),
+        GestureDetector(
+            onTap: () {
+              return showDialogueBox(context, 'Coming Soon', 'Social Login');
+            },
+            child: _reusableIcons("facebook", context))
       ],
     ),
   );
 }
 
-Widget _reusableIcons(String iconName) {
+Widget _reusableIcons(String iconName, context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      showDialogueBox(context, 'Coming soon', 'Social login');
+    },
     child: SizedBox(
       height: 48.w,
       width: 48.w,

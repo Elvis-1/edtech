@@ -5,7 +5,7 @@ import 'package:edtech/common/utils/http_util.dart';
 class CourseApi {
   Future<CourseListResponseEntity> courseList() async {
     var response = await HttpUtil().postData('api/courseList');
-
+    print(response);
     return CourseListResponseEntity.fromJson(response);
   }
 

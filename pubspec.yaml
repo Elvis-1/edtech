@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: '>=2.19.4 <3.0.0'
@@ -47,10 +47,28 @@ dependencies:
   dio: ^5.2.1+1
   connectivity_plus: ^4.0.1
   internet_connection_checker_plus: ^1.0.1
+  package_rename: ^1.3.3
+  flutter_native_splash: ^2.2.19
+  webview_flutter: ^3.0.1
+
+
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  image: "assets/images/app_logo.png"
+  color : "#ffffff"
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21    
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -101,3 +119,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+package_rename_config:
+  android:
+    app_name: LearnIt # (String) The display name of the android app
+    package_name: com.elvis.learnIt # (String) The package name of the android app
+    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+    lang: # (Optional) (String) The android development language {kotlin(default) or java}
+
+

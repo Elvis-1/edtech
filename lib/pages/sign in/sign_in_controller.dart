@@ -35,21 +35,23 @@ class SignInController {
       if (type == "email") {
         // BlocProvider.of<SignInBloc>(context).state
         final state = context.read<SignInBloc>().state;
-        String emailAddress = state.email;
-        String password = state.password;
+        String email = state.email;
+        String passwordAddress = state.password;
 
-        if (emailAddress.isEmpty) {
+        if (email.isEmpty) {
           //
           toastInfo(msg: "You need to fill in an email address");
           return;
         }
-        if (password.isEmpty) {
+        if (passwordAddress.isEmpty) {
           //
           toastInfo(msg: "You need to fill in a password");
           return;
         }
 
         try {
+          String emailAddress = email.trim();
+          String password = passwordAddress.trim();
           final credentials = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
@@ -105,7 +107,10 @@ class SignInController {
           }
         } catch (e) {}
       }
-    } catch (e) {}
+    } catch (e) {
+      print("Got here");
+      print(e.toString());
+    }
   }
 
   asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
@@ -115,25 +120,31 @@ class SignInController {
       dismissOnTap: true,
     );
 
-    var result = await UserAPI.login(params: loginRequestEntity);
+    try {
+      var result = await UserAPI.login(params: loginRequestEntity);
 
-    if (result.code == 200) {
-      try {
-        Global.storageService.setString(
-            AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data));
-        Global.storageService.setString(
-            AppConstants.STORAGE_USER_TOKEN_KEY, result.data.access_token);
-        EasyLoading.dismiss();
-        if (context.mounted) {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil("/application", (route) => false);
+      if (result.code == 200) {
+        try {
+          Global.storageService.setString(
+              AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data));
+          Global.storageService.setString(
+              AppConstants.STORAGE_USER_TOKEN_KEY, result.data.access_token);
+          EasyLoading.dismiss();
+          if (context.mounted) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
+            return;
+          }
+        } catch (e) {
+          print("saving local storage error ${e.toString()}");
         }
-      } catch (e) {
-        print("saving local storage error ${e.toString()}");
+      } else {
+        print('code is not 200');
+        EasyLoading.dismiss();
+        toastInfo(msg: "Unknown Error");
       }
-    } else {
-      EasyLoading.dismiss();
-      toastInfo(msg: "Unknown Error");
+    } catch (e) {
+      print(e);
     }
   }
 }
