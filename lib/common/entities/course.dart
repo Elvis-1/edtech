@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CourseRequestEntity {
@@ -157,8 +158,8 @@ class CourseItem {
   String? price;
   String? amount_total;
   int? lesson_num;
-  String? video_len;
-  String? down_num;
+  int? video_len;
+  int? down_num;
   int? follow;
   int? score;
   int? id;
@@ -187,7 +188,7 @@ class CourseItem {
         video: json["video"],
         price: json["price"].toString(),
         amount_total: json["amount_total"],
-        lesson_num: int.parse(json["lesson_num"]),
+        lesson_num: json["lesson_num"],
         video_len: json["video_length"],
         down_num: json["downloadable_res"],
         follow: json["follow"],

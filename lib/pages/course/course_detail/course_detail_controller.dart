@@ -56,13 +56,17 @@ class CourseDetailController {
     if (result.code == 200) {
       // cleaner format of a url
       var url = Uri.decodeFull(result.data!);
-      // showDialogueBox(context, 'Coming soon', 'Order');
-      await Navigator.of(context)
+      var res = await Navigator.of(context)
           .pushNamed(AppRoutes.PAY_WEB_VIEW, arguments: {"url": url});
       // print("-- my returned stripe url is $url ---------");
+
+      if (res == 'success') {
+        toastInfo(msg: 'You bought it successfully');
+      }
     } else {
-      showDialogueBox(context, 'Coming soon', 'Order');
+      showDialogueBox(context, result.msg!, 'Order');
       print("Payment failed");
+      toastInfo(msg: result.msg!);
     }
   }
 }

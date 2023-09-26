@@ -16,3 +16,10 @@ Widget reusableText(String text,
     ),
   );
 }
+
+AppBar buildAppBar(String url) {
+  return AppBar(
+    centerTitle: true,
+    title: reusableText(url),
+  );
+}

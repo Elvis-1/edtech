@@ -6,13 +6,6 @@ import '../../../common/values/colors.dart';
 import '../../../common/values/constant.dart';
 import '../course_detail/bloc/course_detail_state.dart';
 
-AppBar buildAppBar() {
-  return AppBar(
-    centerTitle: true,
-    title: reusableText('Course Details'),
-  );
-}
-
 Widget thumbnail(CourseDetailsState state) {
   return Container(
     width: 325.w,

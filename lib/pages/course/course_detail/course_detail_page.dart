@@ -45,7 +45,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
               color: Colors.white,
               child: Scaffold(
                 backgroundColor: Colors.white,
-                appBar: buildAppBar(),
+                appBar: buildAppBar("Course Detail"),
                 body: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(

@@ -31,7 +31,7 @@ class HttpUtil {
       Map<String, dynamic>? queryParameters,
       Options? options}) async {
     Options requestOptions = Options();
-
+    // print('calllllllllllllled');
     requestOptions.headers = requestOptions.headers ?? {};
 
     Map<String, dynamic>? authorisation = getAuthorizationHeader();

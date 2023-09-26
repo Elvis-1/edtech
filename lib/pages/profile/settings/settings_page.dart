@@ -1,5 +1,6 @@
 import 'package:edtech/common/routes/names.dart';
 import 'package:edtech/common/values/constant.dart';
+import 'package:edtech/common/widgets/base_text_widget.dart';
 import 'package:edtech/global.dart';
 import 'package:edtech/pages/application/bloc/app_events.dart';
 import 'package:edtech/pages/profile/settings/bloc/settings_bloc.dart';
@@ -32,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: buildAppbar(),
+      appBar: buildAppBar("Settings"),
       body: SingleChildScrollView(
         child:
             BlocBuilder<SettingsBloc, SettingStates>(builder: (context, state) {
