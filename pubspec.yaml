@@ -51,6 +51,7 @@ dependencies:
   flutter_native_splash: ^2.2.19
   webview_flutter: ^4.2.4
   flutter_inappwebview: ^5.7.2+3
+  video_player: ^2.7.2
   # webview_flutter: ^3.0.1
   # flutter_inappwebview: ^5.7.2+3
 

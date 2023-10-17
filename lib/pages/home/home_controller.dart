@@ -35,10 +35,15 @@ class HomeController {
           context!
               .read<HomePageBlocs>()
               .add(HomePageCourseItemEvent(result.data!));
+          return;
         }
       } else {
         print(result.code);
+        return;
       }
+    } else {
+      print("User has already logged in");
     }
+    return;
   }
 }

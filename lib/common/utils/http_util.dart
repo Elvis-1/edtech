@@ -45,7 +45,7 @@ class HttpUtil {
           data: data,
           queryParameters: queryParameters,
           options: requestOptions);
-      print("My response data is ${response.data}");
+      // print("My response data is ${response.data}");
 
       return response.data;
     } catch (e) {

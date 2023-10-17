@@ -1,5 +1,7 @@
 import 'package:edtech/common/apis/course_api.dart';
+import 'package:edtech/common/apis/lesson_api.dart';
 import 'package:edtech/common/entities/course.dart';
+import 'package:edtech/common/entities/entities.dart';
 import 'package:edtech/common/routes/names.dart';
 import 'package:edtech/common/widgets/dialog.dart';
 import 'package:edtech/common/widgets/flutter_toast.dart';
@@ -17,10 +19,11 @@ class CourseDetailController {
 
   void init() async {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
-    asyncLoadAllData(args["id"]);
+    asyncLoadCourseData(args["id"]);
+    asyncLoadLessonData(args["id"]);
   }
 
-  asyncLoadAllData(int? id) async {
+  asyncLoadCourseData(int? id) async {
     CourseRequestEntity courseRequestEntity = CourseRequestEntity();
     courseRequestEntity.id = id;
 
@@ -38,6 +41,21 @@ class CourseDetailController {
     } else {
       toastInfo(msg: "Something went wrong");
       print("------------ Error ${result.data}");
+    }
+  }
+
+  asyncLoadLessonData(int id) async {
+    LessonRequestEntity lessonRequestEntity = LessonRequestEntity();
+    lessonRequestEntity.id = id;
+    var result = await LessonApi.lessonList(params: lessonRequestEntity);
+    // print("--my lesson data ${result.data!.length.toString()}");
+    if (result.code == 200) {
+      context
+          .read<CourseDetailsBloc>()
+          .add(TriggerLessonListEvent(result.data!));
+      print("My lesson data name is ${result.data![0].thumbnail}");
+    } else {
+      toastInfo(msg: "Something went wrong");
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:edtech/common/routes/names.dart';
 import 'package:edtech/common/widgets/base_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -137,66 +138,78 @@ Widget courseSummaryView(BuildContext context, CourseDetailsState state) {
   );
 }
 
-Widget courseLessonList() {
-  return Container(
-    width: 325.w,
-    height: 80.h,
-    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-    decoration: BoxDecoration(
-        color: Color.fromRGBO(255, 255, 255, 1),
-        borderRadius: BorderRadius.circular(10.w),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            offset: Offset(0, 1),
-          )
-        ]),
-    child: InkWell(
-      onTap: () {},
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // image and text
-          Row(
-            children: [
-              Container(
-                width: 60.w,
-                height: 60.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.h),
-                    image: const DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage("assets/icons/Image(1).png"))),
+Widget courseLessonList(CourseDetailsState state) {
+  return SingleChildScrollView(
+    child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: state.lessonItem.length,
+        itemBuilder: ((context, index) => Container(
+              margin: EdgeInsets.only(top: 10.h),
+              width: 325.w,
+              height: 80.h,
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  borderRadius: BorderRadius.circular(10.w),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      offset: Offset(0, 1),
+                    )
+                  ]),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(AppRoutes.LESSON_DETAILS_PAGE,
+                      arguments: {'id': state.lessonItem[index].id});
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // image and text
+                    Row(
+                      children: [
+                        Container(
+                          width: 60.w,
+                          height: 60.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.h),
+                              image: DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  image: NetworkImage(
+                                      state.lessonItem[index].thumbnail!))),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // list item title
+                            _listContainer(
+                                state.lessonItem[index].name.toString()),
+                            // course list description
+                            _listContainer(
+                                state.lessonItem[index].description.toString(),
+                                fontSize: 10,
+                                color: AppColors.primaryThirdElementText,
+                                fontWeight: FontWeight.normal)
+                          ],
+                        )
+                      ],
+                    ),
+                    // for showing the right arrow
+                    Container(
+                      child: Image(
+                          height: 24.h,
+                          width: 24.h,
+                          image: AssetImage("assets/icons/arrow_right.png")),
+                    )
+                  ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // list item title
-                  _listContainer(),
-                  // course list description
-                  _listContainer(
-                      fontSize: 10,
-                      color: AppColors.primaryThirdElementText,
-                      fontWeight: FontWeight.normal)
-                ],
-              )
-            ],
-          ),
-          // for showing the right arrow
-          Container(
-            child: Image(
-                height: 24.h,
-                width: 24.h,
-                image: AssetImage("assets/icons/arrow_right.png")),
-          )
-        ],
-      ),
-    ),
+            ))),
   );
 }
 
-Widget _listContainer(
+Widget _listContainer(String name,
     {double fontSize = 13,
     Color color = AppColors.primaryText,
     FontWeight fontWeight = FontWeight.bold}) {
@@ -204,7 +217,7 @@ Widget _listContainer(
     margin: EdgeInsets.only(left: 6.w),
     width: 200.w,
     child: Text(
-      "UI Design",
+      name,
       overflow: TextOverflow.clip,
       maxLines: 1,
       style: TextStyle(

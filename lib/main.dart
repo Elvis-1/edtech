@@ -39,4 +39,19 @@ class MyApp extends StatelessWidget {
   }
 
   // 2:43 part 6
+
+//   Thank you for your clarifications.
+// You can follow these instructions: https://www.namecheap.com/support/knowledgebase/article.aspx/10038/31/how-to-configure-a-contact-form-with-us/#smtpwp
+
+// And use these SMTP details:
+// From Email - the email address you want to use to send all WordPress emails from
+// From Name - the name that the emails will be sent from
+// Mailer - choose Other
+// SMTP Host - server183.web-hosting.com
+// Encryption - TLS or SSL
+// SMTP Port - 465 (SSL) or 587 (TLS)
+// Auto TLS - if your server supports TLS encryption, you may enable this option
+// Authentication - On
+// SMTP Username - full email address
+// SMTP Password - password for that email address
 }

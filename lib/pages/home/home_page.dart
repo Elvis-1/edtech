@@ -40,67 +40,72 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: BlocBuilder<HomePageBlocs, HomePageStates>(
-        builder: (context, state) {
-          if (state.courseItem.isEmpty) {
-            HomeController(context: context).init();
-            print("-------course is empty------");
-          } else {
-            print("-------state.course is not empty------");
-          }
-          return Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 0,
-              horizontal: 25.w,
-            ),
-            child: CustomScrollView(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: homePageText("Hello",
-                      color: AppColors.primaryThirdElementText, top: 20),
-                ),
-                SliverToBoxAdapter(
-                  child: homePageText(userProfile.name!, top: 5),
-                ),
-                SliverPadding(padding: EdgeInsets.only(top: 20.h)),
-                SliverToBoxAdapter(
-                  child: searchView(),
-                ),
-                SliverToBoxAdapter(
-                  child: slidersView(context, state),
-                ),
-                SliverToBoxAdapter(
-                  child: menuView(),
-                ),
-                SliverPadding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 18.h, horizontal: 8.w),
-                  sliver: SliverGrid(
-                      delegate: SliverChildBuilderDelegate(
-                          childCount: state.courseItem.length,
-                          (BuildContext context, int index) {
-                        return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                  AppRoutes.COURSE_DETAILS_PAGE,
-                                  arguments: {
-                                    "id": state.courseItem.elementAt(index).id
-                                  });
-                            },
-                            child: courseGrid(state.courseItem[index]));
-                      }),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 15,
-                              crossAxisSpacing: 15,
-                              childAspectRatio: 1.6)),
-                ),
-              ],
-            ),
-          );
+      body: RefreshIndicator(
+        onRefresh: () {
+          return HomeController(context: context).init();
         },
+        child: BlocBuilder<HomePageBlocs, HomePageStates>(
+          builder: (context, state) {
+            if (state.courseItem.isEmpty) {
+              HomeController(context: context).init();
+              print("-------course is empty------");
+            } else {
+              print("-------state.course is not empty------");
+            }
+            return Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 25.w,
+              ),
+              child: CustomScrollView(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: homePageText("Hello",
+                        color: AppColors.primaryThirdElementText, top: 20),
+                  ),
+                  SliverToBoxAdapter(
+                    child: homePageText(userProfile.name!, top: 5),
+                  ),
+                  SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+                  SliverToBoxAdapter(
+                    child: searchView(),
+                  ),
+                  SliverToBoxAdapter(
+                    child: slidersView(context, state),
+                  ),
+                  SliverToBoxAdapter(
+                    child: menuView(),
+                  ),
+                  SliverPadding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 8.w),
+                    sliver: SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                            childCount: state.courseItem.length,
+                            (BuildContext context, int index) {
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    AppRoutes.COURSE_DETAILS_PAGE,
+                                    arguments: {
+                                      "id": state.courseItem.elementAt(index).id
+                                    });
+                              },
+                              child: courseGrid(state.courseItem[index]));
+                        }),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 15,
+                                crossAxisSpacing: 15,
+                                childAspectRatio: 1.6)),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
