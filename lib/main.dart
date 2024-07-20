@@ -1,5 +1,4 @@
 import 'package:edtech/common/routes/routes.dart';
-import 'package:edtech/pages/application/application_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

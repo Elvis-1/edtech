@@ -1,9 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:edtech/common/service/storage_service.dart';
 import 'package:edtech/common/values/colors.dart';
 import 'package:edtech/common/values/constant.dart';
 import 'package:edtech/global.dart';
-import 'package:edtech/main.dart';
 import 'package:edtech/pages/welcome/bloc/welcom_block.dart';
 import 'package:edtech/pages/welcome/bloc/welcome_event.dart';
 import 'package:edtech/pages/welcome/bloc/welcome_state.dart';

@@ -15,10 +15,10 @@ class LessonController {
   void init() async {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
     context.read<LessonBlocs>().add(TriggerPlay(false));
-    asyncLoadLessonData(args['id']);
+    await asyncLoadLessonData(args['id']);
   }
 
-  void asyncLoadLessonData(int? id) async {
+  Future<void> asyncLoadLessonData(int? id) async {
     LessonRequestEntity lessonRequestEntity = LessonRequestEntity();
     lessonRequestEntity.id = id;
     var result = await LessonApi.lessonDetail(params: lessonRequestEntity);
@@ -28,11 +28,21 @@ class LessonController {
       if (result.data!.isNotEmpty) {
         var url = result.data!.elementAt(0).url;
         // print()
-        videoPlayerController =
-            VideoPlayerController.networkUrl(Uri.parse(url!));
+        videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'));
         var initPlayer = videoPlayerController!.initialize();
         context.read<LessonBlocs>().add(TriggerUrlItem(initPlayer));
       }
     }
+  }
+
+  void playVideo(String url) {
+    if (videoPlayerController != null) {
+      videoPlayerController!.pause();
+      videoPlayerController!.dispose();
+    }
+    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(url));
+    context.read<LessonBlocs>().add(TriggerPlay(false));
+    //  context.read<LessonBlocs>().add(TriggerUrlItem(initVideoPlayerFuture));
   }
 }
